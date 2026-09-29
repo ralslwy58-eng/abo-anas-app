@@ -1,0 +1,3427 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    حاسبة أبو أنس للآيسكريم والمرطبات
+  </title>
+
+
+  <style>
+
+    :root {
+
+      --primary-color: #173438;
+      --primary-dark: #12292c;
+
+      --accent-color: #0d8f88;
+      --accent-dark: #0b7772;
+      --accent-light: #67ddd5;
+
+      --bg-color: #f4f8f8;
+      --card-bg: #ffffff;
+
+      --border-color: #dce8e7;
+
+      --text-main: #17272a;
+      --text-muted: #829092;
+
+      --soft-teal: #eef8f7;
+      --soft-blue: #eef4f5;
+
+      --danger-bg: #fdecec;
+      --danger-text: #c53d3d;
+
+    }
+
+
+    * {
+
+      box-sizing: border-box;
+
+      margin: 0;
+      padding: 0;
+
+      font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        sans-serif;
+
+    }
+
+
+    body {
+
+      background-color: var(--bg-color);
+
+      display: flex;
+
+      justify-content: center;
+
+      padding:
+        12px
+        12px
+        40px;
+
+      color: var(--text-main);
+
+    }
+
+
+    .app-container {
+
+      width: 100%;
+
+      max-width: 440px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 16px;
+
+    }
+
+
+    /* =========================
+       الترويسة
+    ========================= */
+
+
+    .header {
+
+      background:
+        linear-gradient(
+          180deg,
+          #24484c 0%,
+          #173438 100%
+        );
+
+      color: white;
+
+      border-radius: 20px;
+
+      padding:
+        14px
+        14px
+        16px;
+
+      text-align: center;
+
+      box-shadow:
+        0 6px 20px
+        rgba(23,52,56,0.16);
+
+      overflow: hidden;
+
+    }
+
+
+    .brand-logo-wrap {
+
+      width: 100%;
+
+      height: 145px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      margin-bottom: 4px;
+
+    }
+
+
+    .brand-logo {
+
+      display: block;
+
+      width:
+        min(100%, 360px);
+
+      max-height: 145px;
+
+      object-fit: contain;
+
+      border-radius: 12px;
+
+    }
+
+
+    .header-title {
+
+      font-size: 0.88rem;
+
+      color: #dde9e8;
+
+      margin-top: 2px;
+
+      font-weight: 600;
+
+    }
+
+
+    .address-link {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 5px;
+
+      color: white;
+
+      text-decoration: none;
+
+      font-size: 0.78rem;
+
+      line-height: 1.5;
+
+      margin-top: 8px;
+
+      padding:
+        7px
+        12px;
+
+      border-radius: 12px;
+
+      background:
+        rgba(255,255,255,0.07);
+
+    }
+
+
+    .contact-row {
+
+      display: flex;
+
+      gap: 7px;
+
+      margin-top: 8px;
+
+    }
+
+
+    .contact-btn {
+
+      flex: 1;
+
+      min-width: 0;
+
+      min-height: 40px;
+
+      border-radius: 13px;
+
+      text-decoration: none;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 5px;
+
+      font-size: 0.76rem;
+
+      font-weight: 700;
+
+      transition:
+        transform 0.15s ease,
+        filter 0.2s ease;
+
+    }
+
+
+    .contact-btn:active {
+
+      transform: scale(0.98);
+
+    }
+
+
+    .call-btn {
+
+      background:
+        rgba(255,255,255,0.95);
+
+      color: var(--primary-color);
+
+    }
+
+
+    .whatsapp-btn {
+
+      background:
+        var(--accent-color);
+
+      color: white;
+
+    }
+
+
+    /* =========================
+       البطاقة الرئيسية
+    ========================= */
+
+
+    .content-card {
+
+      background:
+        var(--card-bg);
+
+      border-radius: 20px;
+
+      padding:
+        18px
+        14px;
+
+      box-shadow:
+        0 4px 18px
+        rgba(23,52,56,0.06);
+
+    }
+
+
+    .card-title {
+
+      font-size: 1.05rem;
+
+      font-weight: bold;
+
+      color: var(--text-main);
+
+      margin-bottom: 14px;
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      gap: 8px;
+
+    }
+
+
+    .items-list {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 12px;
+
+    }
+
+
+    /* =========================
+       كرت الصنف
+    ========================= */
+
+
+    .item-card {
+
+      background:
+        #fafcfc;
+      border:
+        1px solid
+        var(--border-color);
+
+      border-radius: 18px;
+
+      padding: 12px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 10px;
+
+      transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+
+    }
+
+
+    .item-card:hover {
+
+      border-color:
+        #c8dedc;
+
+      box-shadow:
+        0 4px 14px
+        rgba(23,52,56,0.05);
+
+    }
+
+
+    .item-header {
+
+      display: flex;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        center;
+
+      gap: 10px;
+
+    }
+
+
+    .item-info {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 11px;
+
+      min-width: 0;
+
+    }
+
+
+    /* =========================
+       صورة المنتج
+    ========================= */
+
+
+    .item-image-wrap {
+
+      width: 62px;
+
+      height: 62px;
+
+      flex-shrink: 0;
+
+      border-radius: 17px;
+
+      overflow: hidden;
+
+      background:
+        var(--soft-teal);
+
+      border:
+        1px solid
+        var(--border-color);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+    }
+
+
+    .item-image {
+
+      width: 100%;
+
+      height: 100%;
+
+      object-fit: cover;
+
+      display: block;
+
+    }
+
+
+    .empty-product-image {
+
+      width: 100%;
+
+      height: 100%;
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      justify-content: center;
+
+      color:
+        var(--accent-dark);
+
+      font-size: 0.62rem;
+
+      gap: 4px;
+
+      text-align: center;
+
+    }
+
+
+    .empty-product-image svg {
+
+      width: 24px;
+
+      height: 24px;
+
+      fill: none;
+
+      stroke: currentColor;
+
+      stroke-width: 1.7;
+
+    }
+
+
+    .item-name {
+
+      font-size: 1rem;
+
+      font-weight: 700;
+
+      color:
+        var(--text-main);
+
+    }
+
+
+    .item-price-tag {
+
+      font-size: 0.8rem;
+
+      color:
+        var(--text-muted);
+
+      margin-top: 3px;
+
+      line-height: 1.5;
+
+    }
+
+
+    .piece-price {
+
+      font-size: 0.75rem;
+
+      color:
+        var(--accent-color);
+
+      font-weight: bold;
+
+      white-space: nowrap;
+
+    }
+
+
+    /* =========================
+       حقول الكميات
+    ========================= */
+
+
+    .inputs-grid {
+
+      display: grid;
+
+      grid-template-columns:
+        1fr
+        1fr;
+
+      gap: 8px;
+
+    }
+
+
+    .input-box {
+
+      display: flex;
+
+      align-items: center;
+
+      background: #fff;
+
+      border:
+        1px solid
+        var(--border-color);
+
+      border-radius: 14px;
+
+      padding:
+        4px
+        8px;
+
+      min-height: 42px;
+
+      transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+
+    }
+
+
+    .input-box:focus-within {
+
+      border-color:
+        var(--accent-color);
+
+      box-shadow:
+        0 0 0 3px
+        rgba(13,143,136,0.08);
+
+    }
+
+
+    .input-box label {
+
+      font-size: 0.75rem;
+
+      font-weight: bold;
+
+      color:
+        var(--text-muted);
+
+      width: 45px;
+
+    }
+
+
+    .input-box input {
+
+      width: 100%;
+
+      border: none;
+
+      outline: none;
+
+      background: transparent;
+
+      font-size: 0.95rem;
+
+      font-weight: bold;
+
+      color:
+        var(--text-main);
+
+      text-align: center;
+
+    }
+
+
+    .input-box input::placeholder {
+
+      color: #b4c0c1;
+
+    }
+
+
+    /* =========================
+       الأزرار
+    ========================= */
+
+
+    .actions-row {
+
+      display: flex;
+
+      gap: 8px;
+
+      margin-top: 18px;
+
+    }
+
+
+    .btn {
+
+      flex: 1;
+
+      height: 44px;
+
+      border: none;
+
+      border-radius: 16px;
+
+      font-size: 0.85rem;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 6px;
+
+      transition:
+        transform 0.15s ease,
+        filter 0.2s ease,
+        box-shadow 0.2s ease;
+
+    }
+
+
+    .btn:hover {
+
+      filter:
+        brightness(0.98);
+
+      box-shadow:
+        0 4px 10px
+        rgba(23,52,56,0.07);
+
+    }
+
+
+    .btn:active {
+
+      transform:
+        scale(0.98);
+
+      box-shadow: none;
+
+    }
+
+
+    .btn-calc {background:
+        linear-gradient(
+          135deg,
+          #0d8f88 0%,
+          #0b7772 100%
+        );
+
+      color: white;
+
+      font-size: 1rem;
+
+      margin-top: 14px;
+
+      width: 100%;
+
+      height: 48px;
+
+      border-radius: 16px;
+
+      box-shadow:
+        0 4px 12px
+        rgba(13,143,136,0.16);
+
+    }
+
+
+    .btn-add {
+
+      background:
+        var(--soft-teal);
+
+      color:
+        var(--accent-dark);
+
+      border:
+        1px solid
+        #d7ecea;
+
+    }
+
+
+    .btn-edit {
+
+      background:
+        var(--soft-blue);
+
+      color:
+        var(--primary-color);
+
+      border:
+        1px solid
+        #dde8ea;
+
+    }
+
+
+    /* =========================
+       الإجمالي
+    ========================= */
+
+
+    .total-display {
+
+      margin-top: 14px;
+
+      background:
+        linear-gradient(
+          180deg,
+          #173438 0%,
+          #12292c 100%
+        );
+
+      color: white;
+
+      padding:
+        18px
+        14px;
+
+      border-radius: 24px;
+
+      text-align: center;
+
+      display: none;
+
+      box-shadow:
+        0 7px 22px
+        rgba(23,52,56,0.13);
+
+      overflow: hidden;
+
+    }
+
+
+    .total-display > span {
+
+      font-size: 0.85rem;
+
+      color:
+        #dce8e7;
+
+    }
+
+
+    .total-display h2 {
+
+      font-size: 1.65rem;
+
+      margin-top: 5px;
+
+      color:
+        var(--accent-light);
+
+      font-weight: 800;
+
+    }
+
+
+    .total-display #summaryDetails {
+
+      font-size: 0.75rem;
+
+      color:
+        #b9ccca !important;
+
+      margin-top: 7px;
+
+    }
+
+
+    /* =========================
+       النوافذ المنبثقة
+    ========================= */
+
+
+    .modal {
+
+      position: fixed;
+
+      inset: 0;
+
+      background:
+        rgba(15,35,37,0.55);
+
+      backdrop-filter:
+        blur(3px);
+
+      -webkit-backdrop-filter:
+        blur(3px);
+
+      display: none;
+
+      align-items: center;
+
+      justify-content: center;
+
+      padding: 12px;
+
+      z-index: 100;
+
+    }
+
+
+    .modal-content {
+
+      background: #fff;
+
+      padding:
+        18px
+        14px;
+
+      border-radius: 20px;
+
+      width: 100%;
+
+      max-width: 400px;
+
+      max-height: 85vh;
+
+      overflow-y: auto;
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 12px;
+
+      box-shadow:
+        0 14px 40px
+        rgba(0,0,0,0.15);
+
+    }
+
+
+    /* =========================
+       جدول التعديل
+    ========================= */
+
+
+    .edit-table-header {
+
+      display: grid;
+
+      grid-template-columns:
+        1.45fr
+        0.85fr
+        1.1fr
+        55px
+        30px;
+
+      gap: 5px;
+
+      font-size: 0.68rem;
+
+      font-weight: bold;
+
+      color:
+        var(--text-muted);
+
+      text-align: center;
+
+      padding-bottom: 6px;
+
+      border-bottom:
+        1px solid
+        var(--border-color);
+
+      align-items: center;
+
+    }
+
+
+    .edit-item-row {
+
+      display: grid;
+
+      grid-template-columns:
+        1.45fr
+        0.85fr
+        1.1fr
+        55px
+        30px;
+
+      gap: 5px;
+
+      align-items: center;
+
+      margin-bottom: 8px;
+
+    }
+
+
+    .edit-item-row input {
+
+      height: 38px;
+
+      padding:
+        2px
+        6px;
+
+      font-size: 0.78rem;
+
+      background:
+        #fafcfc;
+
+      border:
+        1px solid
+        var(--border-color);
+
+      border-radius: 12px;
+
+      text-align: center;
+
+      width: 100%;
+
+      outline: none;
+
+    }
+
+
+    .edit-item-row input:focus {
+
+      border-color:
+        var(--accent-color);
+
+      box-shadow:
+        0 0 0 3px
+        rgba(13,143,136,0.08);
+
+    }
+
+
+    .edit-item-row
+    input.item-name-input {
+
+      text-align: right;
+
+      padding-right: 8px;
+
+      font-weight: 600;
+
+    }
+
+
+    .input-error {
+
+      border-color:
+        #e05a5a !important;
+
+      background:
+        #fff5f5 !important;
+
+    }
+
+
+    /* =========================
+       صور التعديل
+    ========================= */
+
+
+    .edit-item-image-box {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 3px;
+
+      flex-wrap: wrap;
+
+    }
+
+
+    .edit-item-image-preview {
+
+      width: 38px; height: 38px;
+
+      object-fit: cover;
+
+      border-radius: 11px;
+
+      border:
+        1px solid
+        var(--border-color);
+
+      background:
+        var(--soft-teal);
+
+    }
+
+
+    .edit-empty-image {
+
+      width: 38px;
+
+      height: 38px;
+
+      border-radius: 11px;
+
+      background:
+        var(--soft-teal);
+
+      color:
+        var(--accent-dark);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      font-size: 10px;
+
+      text-align: center;
+
+    }
+
+
+    .edit-image-label {
+
+      width: 38px;
+
+      height: 38px;
+
+      border-radius: 11px;
+
+      background:
+        var(--soft-teal);
+
+      color:
+        var(--accent-dark);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      cursor: pointer;
+
+      font-size: 16px;
+
+      border:
+        1px solid
+        #d7ecea;
+
+    }
+
+
+    .edit-image-input {
+
+      display: none;
+
+    }
+
+
+    .delete-image-btn {
+
+      width: 38px;
+
+      height: 24px;
+
+      border: none;
+
+      border-radius: 8px;
+
+      background:
+        var(--danger-bg);
+
+      color:
+        var(--danger-text);
+
+      font-size: 0.58rem;
+
+      cursor: pointer;
+
+      margin-top: 2px;
+
+    }
+
+
+    .btn-delete-item {
+
+      background:
+        var(--danger-bg);
+
+      color:
+        var(--danger-text);
+
+      border: none;
+
+      width: 30px;
+
+      height: 38px;
+
+      border-radius: 12px;
+
+      font-size: 0.9rem;
+
+      font-weight: bold;
+
+      cursor: pointer;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+    }
+
+
+    /* =========================
+       اختيار صورة عند إضافة صنف
+    ========================= */
+
+
+    .image-upload-box {
+
+      border:
+        1px dashed
+        #b9cfcd;
+
+      background:
+        #f8fcfc;
+
+      border-radius: 16px;
+
+      padding: 12px;
+
+      text-align: center;
+
+    }
+
+
+    .image-upload-label {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 7px;
+
+      min-height: 42px;
+
+      background:
+        var(--soft-teal);
+
+      color:
+        var(--accent-dark);
+
+      border-radius: 13px;
+
+      font-weight: 700;
+
+      font-size: 0.85rem;
+
+      cursor: pointer;
+
+      border:
+        1px solid
+        #d7ecea;
+
+    }
+
+
+    .image-upload-box
+    input[type="file"] {
+
+      display: none;
+
+    }
+
+
+    .image-preview {
+
+      display: none;
+
+      width: 100px;
+
+      height: 100px;
+
+      object-fit: cover;
+
+      border-radius: 18px;
+
+      margin:
+        10px
+        auto
+        0;
+
+      border:
+        2px solid
+        #dce8e7;
+
+    }
+
+
+    .modal-content
+    input[type="text"],
+    .modal-content
+    input[type="number"] {
+
+      padding: 10px;
+
+      background:
+        #fafcfc;
+
+      border:
+        1px solid
+        var(--border-color);
+
+      border-radius: 14px;
+
+      font-size: 0.9rem;
+
+      outline: none;
+
+      color:
+        var(--text-main);
+
+    }
+
+
+    .modal-content input:focus {
+
+      border-color:
+        var(--accent-color);
+
+      box-shadow:
+        0 0 0 3px
+        rgba(13,143,136,0.08);
+
+    }
+
+
+    /* =========================
+       توقيع المطور
+    ========================= */
+
+
+    .developer-footer {
+
+      text-align: center;
+
+      padding:
+        2px
+        8px
+        8px;
+
+      color:
+        var(--text-muted);
+
+      font-size: 0.76rem;
+
+      line-height: 1.8;
+
+    }
+
+
+    .developer-footer
+    .dev-name {
+
+      color:
+        var(--primary-color);
+
+      font-weight: 700;
+
+    }
+
+
+    .developer-whatsapp {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 5px;
+
+      margin-top: 3px;
+
+      color:
+        var(--accent-dark);
+
+      font-weight: 700;
+
+      text-decoration: none;
+
+      padding:
+        3px
+        8px;
+
+      border-radius: 9px;
+
+    }
+
+
+    .developer-whatsapp:active {
+
+      background:
+        var(--soft-teal);
+
+    }
+
+
+    /* =========================
+       الشاشات الصغيرة
+    ========================= */
+
+
+    @media (max-width: 360px) {
+
+      .content-card {padding:
+          16px
+          10px;
+
+      }
+
+
+      .item-card {
+
+        padding: 10px;
+
+      }
+
+
+      .item-image-wrap {
+
+        width: 56px;
+
+        height: 56px;
+
+      }
+
+
+      .item-name {
+
+        font-size: 0.92rem;
+
+      }
+
+
+      .item-price-tag {
+
+        font-size: 0.72rem;
+
+      }
+
+
+      .btn {
+
+        font-size: 0.78rem;
+
+      }
+
+
+      .total-display h2 {
+
+        font-size: 1.45rem;
+
+      }
+
+
+      .contact-btn {
+
+        font-size: 0.7rem;
+
+      }
+
+
+      .brand-logo-wrap {
+
+        height: 125px;
+
+      }
+
+
+      .brand-logo {
+
+        max-height: 125px;
+
+      }
+
+
+      .edit-table-header,
+      .edit-item-row {
+
+        grid-template-columns:
+          1.3fr
+          0.8fr
+          1fr
+          50px
+          28px;
+
+        gap: 4px;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <div class="app-container">
+
+
+    <!-- =====================================
+         ترويسة المحل
+    ====================================== -->
+
+
+    <header class="header">
+
+
+      <div class="brand-logo-wrap">
+
+        <img
+          class="brand-logo"
+          src="logo.jpg"
+          alt="شعار أبو أنس للآيسكريم والمرطبات"
+        >
+
+      </div>
+
+
+      <div class="header-title">
+
+        حاسبة الجملة والتجزئة
+
+      </div>
+
+
+      <a
+        class="address-link"
+        href="https://www.google.com/maps/search/?api=1&query=دمنة+خدير+فكة+سامع+جوار+فندق+غزة"
+        target="_blank"
+        rel="noopener"
+      >
+
+        <span>الموقع</span>
+
+        دمنة خدير – فكة سامع – جوار فندق غزة
+
+      </a>
+
+
+      <div class="contact-row">
+
+
+        <a
+          class="contact-btn call-btn"
+          href="tel:+967733759868"
+        >
+
+          <span>اتصال</span>
+
+          733759868
+
+        </a>
+
+
+        <a
+          class="contact-btn call-btn"
+          href="tel:+967779018676"
+        >
+
+          <span>اتصال</span>
+
+          779018676
+
+        </a>
+
+
+        <a
+          class="contact-btn whatsapp-btn"
+          href="https://wa.me/967733759868?text=السلام%20عليكم،%20أرغب%20بالاستفسار%20عن%20منتجات%20وأسعار%20أبو%20أنس%20للآيسكريم%20والمرطبات."
+          target="_blank"
+          rel="noopener"
+        >
+
+          <span>واتساب</span>
+
+        </a>
+
+
+      </div>
+
+
+    </header>
+
+
+    <!-- =====================================
+         المحتوى الرئيسي
+    ====================================== -->
+
+
+    <main class="content-card">
+
+
+      <div class="card-title">
+
+
+        <span>
+          الأصناف والكميات
+        </span>
+
+
+        <button
+          onclick="resetInputs()"
+          style="
+            background:none;
+            border:none;
+            color:#C53D3D;
+            cursor:pointer;
+            font-size:.8rem;
+            font-weight:600;
+          "
+        >
+
+          تفريغ المدخلات
+
+        </button>
+
+
+      </div>
+
+
+      <div
+        class="items-list"
+        id="itemsList"
+      ></div>
+
+
+      <button
+        class="btn btn-calc"
+        onclick="calculateTotal()"
+      >
+
+        <span>احسب</span>
+
+         الإجمالي النهائي
+
+      </button>
+
+
+      <div
+        class="total-display"
+        id="totalBox"
+      >
+
+        <span>
+          المبلغ الإجمالي المستحق:
+        </span>
+
+
+        <h2 id="totalAmount">
+          0 ريال
+        </h2>
+
+
+        <div id="summaryDetails"></div>
+
+      </div>
+
+
+      <div class="actions-row">
+
+
+        <button
+          class="btn btn-add"
+          onclick="openAddModal()"
+        >
+
+          <span>إضافة</span>
+
+          إضافة صنف
+
+        </button>
+
+
+        <button
+          class="btn btn-edit"
+          onclick="openEditModal()"
+        >
+
+          <span>تعديل</span>
+
+          تعديل الأصناف والأسعار
+
+        </button>
+
+
+      </div>
+
+
+    </main>
+
+
+    <!-- =====================================
+         توقيع المطور
+    ====================================== -->
+
+
+    <footer class="developer-footer">
+
+
+      <div>
+
+        برمجة وتصميم
+
+        <span class="dev-name">
+          م/ربيع الحريبي
+        </span>
+
+      </div>
+      <a
+        class="developer-whatsapp"
+        href="https://wa.me/967778983131?text=السلام%20عليكم،%20أرغب%20بالتواصل%20مع%20م/ربيع%20الحريبي."
+        target="_blank"
+        rel="noopener"
+      >
+
+        778983131
+
+      </a>
+
+
+    </footer>
+
+
+  </div>
+
+
+  <!-- =====================================
+       نافذة تعديل الأصناف
+  ====================================== -->
+
+
+  <div
+    class="modal"
+    id="editModal"
+  >
+
+
+    <div class="modal-content">
+
+
+      <h3
+        style="
+          font-size:1rem;
+          color:var(--text-main);
+          margin-bottom:4px;
+        "
+      >
+
+        تعديل الأصناف والأسعار
+
+      </h3>
+
+
+      <div id="editListContainer"></div>
+
+
+      <div
+        style="
+          display:flex;
+          gap:8px;
+          margin-top:6px;
+        "
+      >
+
+
+        <button
+          class="btn btn-calc"
+          style="margin-top:0;"
+          onclick="savePrices()"
+        >
+
+          حفظ التعديلات
+
+        </button>
+
+
+        <button
+          class="btn"
+          style="
+            background:#EEF4F5;
+            color:var(--primary-color);
+          "
+          onclick="closeEditModal()"
+        >
+
+          إلغاء
+
+        </button>
+
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================
+       نافذة إضافة صنف
+  ====================================== -->
+
+
+  <div
+    class="modal"
+    id="addModal"
+  >
+
+
+    <div class="modal-content">
+
+
+      <h3
+        style="
+          font-size:1rem;
+          color:var(--text-main);
+        "
+      >
+
+        إضافة صنف جديد
+
+      </h3>
+
+
+      <input
+        type="text"
+        id="newName"
+        placeholder="اسم الصنف"
+      >
+
+
+      <input
+        type="number"
+        id="newUnitsPerBox"
+        placeholder="سعة الكرتون (عدد الحبات)"
+      >
+
+
+      <input
+        type="number"
+        id="newBoxPrice"
+        placeholder="سعر الكرتون (ريال)"
+      >
+
+
+      <!-- اختيار صورة الصنف -->
+
+
+      <div class="image-upload-box">
+
+
+        <label
+          class="image-upload-label"
+          for="newImage"
+        >
+
+          اختيار صورة الصنف من الهاتف
+
+        </label>
+
+
+        <input
+          type="file"
+          id="newImage"
+          accept="image/*"
+          onchange="handleImageSelect(this)"
+        >
+
+
+        <img
+          id="imagePreview"
+          class="image-preview"
+          alt="معاينة صورة الصنف"
+        >
+
+
+      </div>
+
+
+      <div
+        style="
+          display:flex;
+          gap:8px;
+          margin-top:6px;
+        "
+      >
+
+
+        <button
+          class="btn btn-add"
+          onclick="saveNewItem()"
+        >
+
+          إضافة وحفظ
+
+        </button>
+
+
+        <button
+          class="btn"
+          style="
+            background:#EEF4F5;
+            color:var(--text-main);
+          "
+          onclick="closeAddModal()"
+        >
+
+          إلغاء
+
+        </button>
+
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================
+       JavaScript
+  ====================================== -->
+
+
+  <script>
+
+
+    /* =====================================
+       الأصناف الافتراضية
+    ====================================== */
+
+
+    const initialItems = [
+
+
+      {
+        id: 1,
+        name: "المثلوج",
+        unitsPerBox: 75,
+        boxPrice: 15000,
+        image: "",
+        boxQty: "",
+        pieceQty: ""
+      },
+
+
+      {
+        id: 2,
+        name: "شكلاته",
+        unitsPerBox: 70,
+        boxPrice: 14000,
+        image: "",
+        boxQty: "",
+        pieceQty: ""
+      },
+
+
+      {
+        id: 3,
+        name: "جامبو",
+        unitsPerBox: 70,
+        boxPrice: 17500,
+        image: "",
+        boxQty: "",
+        pieceQty: ""
+      },
+
+
+      {
+        id: 4,
+        name: "عائلي",
+        unitsPerBox: 10,
+        boxPrice: 5000,
+        image: "",
+        boxQty: "",
+        pieceQty: ""
+      },
+
+
+      {
+        id: 5,
+        name: "شعير",
+        unitsPerBox: 10,
+        boxPrice: 4000,
+        image: "",
+        boxQty: "",
+        pieceQty: ""
+      },
+      {
+        id: 6,
+        name: "عرائسي كبير",
+        unitsPerBox: 40,
+        boxPrice: 16000,
+        image: "",
+        boxQty: "",
+        pieceQty: ""
+      },
+
+
+      {
+        id: 7,
+        name: "ساندويتش",
+        unitsPerBox: 24,
+        boxPrice: 9600,
+        image: "",
+        boxQty: "",
+        pieceQty: ""
+      }
+
+
+    ];
+
+
+    /* =====================================
+       تحميل البيانات المحفوظة
+    ====================================== */
+
+
+    let items =
+      JSON.parse(
+        localStorage.getItem(
+          "icecream_app_items"
+        )
+      ) || initialItems;
+
+
+    const itemsListContainer =
+      document.getElementById(
+        "itemsList"
+      );
+
+
+    let selectedImageData = "";
+
+
+    /* =====================================
+       أي بيانات قديمة
+    ====================================== */
+
+
+    items = items.map(
+      item => ({
+
+        ...item,
+
+        image:
+          item.image || "",
+
+        boxQty:
+          item.boxQty || "",
+
+        pieceQty:
+          item.pieceQty || ""
+
+      })
+    );
+
+
+    localStorage.setItem(
+      "icecream_app_items",
+      JSON.stringify(items)
+    );
+
+
+    /* =====================================
+       رمز صورة فارغة SVG
+    ====================================== */
+
+
+    function emptyImageHTML() {
+
+      return 
+
+        <div class="empty-product-image">
+
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+
+            <rect
+              x="3"
+              y="5"
+              width="18"
+              height="14"
+              rx="2"
+            ></rect>
+
+            <circle
+              cx="8.5"
+              cy="10"
+              r="1.5"
+            ></circle>
+
+            <path
+              d="
+                M21 16
+                l-5-5
+                -4 4
+                -2-2
+                -5 5
+              "
+            ></path>
+
+          </svg>
+
+          <span>
+            بدون صورة
+          </span>
+
+        </div>
+
+      ;
+
+    }
+
+
+    /* =====================================
+       عرض الأصناف
+    ====================================== */
+
+
+    function renderMainList() {
+
+
+      itemsListContainer.innerHTML = "";
+
+
+      items.forEach(
+        (item, index) => {
+
+
+          const piecePrice =
+            (
+              item.boxPrice /
+              item.unitsPerBox
+            ).toFixed(1);
+
+
+          const card =
+            document.createElement(
+              "div"
+            );
+
+
+          card.className =
+            "item-card";
+
+
+          card.innerHTML = 
+
+
+            <div class="item-header">
+
+
+              <div class="item-info">
+
+
+                <div class="item-image-wrap">
+
+                  ${
+                    item.image
+
+                      ? 
+
+                        <img
+                          class="item-image"
+                          src="${item.image}"
+                          alt="${item.name}"
+                        >
+
+                      `
+
+                      : emptyImageHTML()
+
+                  }
+
+                </div>
+
+
+                <div>
+
+
+                  <div class="item-name">
+
+                    ${item.name}
+
+                  </div>
+
+
+                  <div class="item-price-tag">
+
+                    الكرتون:
+                    ${item.unitsPerBox}
+                    حبة
+                    |
+                    ${Number(
+                      item.boxPrice
+                    ).toLocaleString()}
+                    ريال
+
+                  </div>
+
+
+                </div>
+
+
+              </div>
+
+
+              <div class="piece-price">
+
+                الحبة:
+                ${piecePrice}
+
+              </div>
+
+
+            </div>
+
+
+            <div class="inputs-grid">
+
+
+              <div class="input-box">
+
+
+                <label>
+                  كرتون
+                </label>
+                <input
+                  type="number"
+                  min="0"
+                  placeholder="0"
+                  value="${item.boxQty || ""}"
+                  oninput="
+                    updateItemQty(
+                      ${index},
+                      'boxQty',
+                      this.value
+                    )
+                  "
+                >
+
+
+              </div>
+
+
+              <div class="input-box">
+
+
+                <label>
+                  بالحبة
+                </label>
+
+
+                <input
+                  type="number"
+                  min="0"
+                  placeholder="0"
+                  value="${item.pieceQty || ""}"
+                  oninput="
+                    updateItemQty(
+                      ${index},
+                      'pieceQty',
+                      this.value
+                    )
+                  "
+                >
+
+
+              </div>
+
+
+            </div>
+
+
+          ;
+
+
+          itemsListContainer.appendChild(
+            card
+          );
+
+
+        }
+      );
+
+
+    }
+
+
+    /* =====================================
+       حفظ الكميات
+    ====================================== */
+
+
+    function updateItemQty(
+      index,
+      field,
+      value
+    ) {
+
+
+      items[index][field] =
+        value;
+
+
+      localStorage.setItem(
+        "icecream_app_items",
+        JSON.stringify(items)
+      );
+
+
+    }
+
+
+    /* =====================================
+       حساب الإجمالي
+    ====================================== */
+
+
+    function calculateTotal() {
+
+
+      let totalAmount = 0;
+
+      let totalBoxes = 0;
+
+      let totalPieces = 0;
+
+
+      items.forEach(
+        item => {
+
+
+          const bQty =
+            Number(
+              item.boxQty
+            ) || 0;
+
+
+          const pQty =
+            Number(
+              item.pieceQty
+            ) || 0;
+
+
+          const piecePrice =
+            item.boxPrice /
+            item.unitsPerBox;
+
+
+          if (
+            bQty > 0 ||
+            pQty > 0
+          ) {
+
+
+            totalAmount +=
+              (
+                bQty *
+                item.boxPrice
+              ) +
+              (
+                pQty *
+                piecePrice
+              );
+
+
+            totalBoxes +=
+              bQty;
+
+
+            totalPieces +=
+              pQty;
+
+
+          }
+
+
+        }
+      );
+
+
+      document.getElementById(
+        "totalAmount"
+      ).innerText =
+
+        Math.round(
+          totalAmount
+        ).toLocaleString() +
+
+        " ريال";
+
+
+      document.getElementById(
+        "summaryDetails"
+      ).innerText =
+
+        الكمية: ${totalBoxes} كرتون و ${totalPieces} حبة مفردة;
+
+
+      const totalBox =
+        document.getElementById(
+          "totalBox"
+        );
+
+
+      totalBox.style.display =
+        "block";
+
+
+      totalBox.scrollIntoView({
+        behavior: "smooth"
+      });
+
+
+    }
+
+
+    /* =====================================
+       تفريغ المدخلات
+    ====================================== */
+
+
+    function resetInputs() {
+
+
+      items.forEach(
+        item => {
+
+          item.boxQty = "";
+
+          item.pieceQty = "";
+
+        }
+      );
+
+
+      localStorage.setItem(
+        "icecream_app_items",
+        JSON.stringify(items)
+      );
+
+
+      document.getElementById(
+        "totalBox"
+      ).style.display =
+        "none";
+
+
+      renderMainList();
+
+
+    }
+
+
+    /* =====================================
+       فتح تعديل الأصناف
+    ====================================== */
+
+
+    function openEditModal() {
+
+
+      const container =
+        document.getElementById(
+          "editListContainer"
+        );
+
+
+      container.innerHTML = 
+
+
+        <div class="edit-table-header">
+
+
+          <span
+            style="
+              text-align:right;
+              padding-right:6px;
+            "
+          >
+            الصنف
+          </span>
+
+
+          <span>
+            حبات/ك
+          </span>
+
+
+          <span>
+            سعر الكرتون
+          </span>
+
+
+          <span>
+            صورة
+          </span>
+
+
+          <span></span>
+
+
+        </div>
+        ;
+
+
+      items.forEach(
+        (item, i) => {
+
+
+          const row =
+            document.createElement(
+              "div"
+            );
+
+
+          row.className =
+            "edit-item-row";
+
+
+          row.innerHTML = 
+
+
+            <input
+              type="text"
+              class="item-name-input"
+              id="edit-name-${i}"
+              value="${item.name}"
+            >
+
+
+            <input
+              type="number"
+              id="edit-units-${i}"
+              value="${item.unitsPerBox}"
+            >
+
+
+            <input
+              type="number"
+              id="edit-price-${i}"
+              value="${item.boxPrice}"
+            >
+
+
+            <div
+              class="edit-item-image-box"
+              id="edit-image-box-${i}"
+            >
+
+
+              ${
+                item.image
+
+                  ? 
+
+                    <img
+                      id="edit-image-preview-${i}"
+                      class="edit-item-image-preview"
+                      src="${item.image}"
+                      alt="${item.name}"
+                    >
+
+                  
+
+                  : 
+
+                    <div
+                      id="edit-image-preview-${i}"
+                      class="edit-empty-image"
+                    >
+                      بدون صورة
+                    </div>
+
+                  
+
+              }
+
+
+              <label
+                class="edit-image-label"
+                title="اختيار أو تغيير الصورة"
+              >
+
+                صورة
+
+                <input
+                  type="file"
+                  class="edit-image-input"
+                  accept="image/*"
+                  onchange="
+                    updateItemImage(
+                      ${i},
+                      this
+                    )
+                  "
+                >
+
+              </label>
+
+
+              ${
+                item.image
+
+                  ? 
+
+                    <button
+                      type="button"
+                      class="delete-image-btn"
+                      onclick="
+                        deleteItemImage(
+                          ${i}
+                        )
+                      "
+                    >
+                      حذف الصورة
+                    </button>
+
+                  
+
+                  : ""
+
+              }
+
+
+            </div>
+
+
+            <button
+              class="btn-delete-item"
+              title="حذف الصنف"
+              onclick="
+                deleteItem(${i})
+              "
+            >
+
+              حذف
+
+            </button>
+
+
+          `;
+
+
+          container.appendChild(
+            row
+          );
+
+
+        }
+      );
+
+
+      document.getElementById(
+        "editModal"
+      ).style.display =
+        "flex";
+
+
+    }
+
+
+    /* =====================================
+       معالجة الصورة وتصغيرها
+    ====================================== */
+
+
+    function processImage(
+      file,
+      callback
+    ) {
+
+
+      if (
+        !file ||
+        !file.type.startsWith(
+          "image/"
+        )
+      ) {
+
+        alert(
+          "الملف المختار ليس صورة."
+        );
+
+        return;
+
+      }
+
+
+      const reader =
+        new FileReader();
+
+
+      reader.onload =
+        function(e) {
+
+
+          const img =
+            new Image();
+
+
+          img.onload =
+            function() {
+
+
+              const canvas =
+                document.createElement(
+                  "canvas"
+                );
+
+
+              const maxSize =
+                500;
+
+
+              let width =
+                img.width;
+
+
+              let height =
+                img.height;
+
+
+              if (
+                width > height
+              ) {
+
+
+                if (
+                  width >
+                  maxSize
+                ) {
+
+
+                  height =
+                    height *
+                    (
+                      maxSize /
+                      width
+                    );
+
+
+                  width =
+                    maxSize;
+
+                }
+
+
+              } else {if (
+                  height >
+                  maxSize
+                ) {
+
+
+                  width =
+                    width *
+                    (
+                      maxSize /
+                      height
+                    );
+
+
+                  height =
+                    maxSize;
+
+                }
+
+
+              }
+
+
+              canvas.width =
+                Math.round(
+                  width
+                );
+
+
+              canvas.height =
+                Math.round(
+                  height
+                );
+
+
+              const ctx =
+                canvas.getContext(
+                  "2d"
+                );
+
+
+              ctx.drawImage(
+                img,
+                0,
+                0,
+                canvas.width,
+                canvas.height
+              );
+
+
+              const imageData =
+                canvas.toDataURL(
+                  "image/jpeg",
+                  0.75
+                );
+
+
+              callback(
+                imageData
+              );
+
+
+            };
+
+
+          img.src =
+            e.target.result;
+
+
+        };
+
+
+      reader.readAsDataURL(
+        file
+      );
+
+    }
+
+
+    /* =====================================
+       اختيار صورة عند إضافة صنف
+    ====================================== */
+
+
+    function handleImageSelect(
+      input
+    ) {
+
+
+      const file =
+        input.files[0];
+
+
+      if (!file) {
+        return;
+      }
+
+
+      processImage(
+        file,
+        function(imageData) {
+
+
+          selectedImageData =
+            imageData;
+
+
+          const preview =
+            document.getElementById(
+              "imagePreview"
+            );
+
+
+          preview.src =
+            imageData;
+
+
+          preview.style.display =
+            "block";
+
+
+        }
+      );
+
+
+    }
+
+
+    /* =====================================
+       تغيير صورة صنف موجود
+    ====================================== */
+
+
+    function updateItemImage(
+      index,
+      input
+    ) {
+
+
+      const file =
+        input.files[0];
+
+
+      if (!file) {
+        return;
+      }
+
+
+      processImage(
+        file,
+        function(imageData) {
+
+
+          items[index].image =
+            imageData;
+
+
+          localStorage.setItem(
+            "icecream_app_items",
+            JSON.stringify(items)
+          );
+
+
+          renderMainList();
+
+
+          openEditModal();
+
+
+        }
+      );
+
+
+    }
+
+
+    /* =====================================
+       حذف صورة صنف
+    ====================================== */
+
+
+    function deleteItemImage(
+      index
+    ) {
+
+
+      if (
+        !confirm(
+          هل تريد حذف صورة صنف "${items[index].name}"؟
+        )
+      ) {
+
+        return;
+
+      }
+
+
+      items[index].image =
+        "";
+
+
+      localStorage.setItem(
+        "icecream_app_items",
+        JSON.stringify(items)
+      );
+
+
+      renderMainList();
+
+
+      openEditModal();
+
+
+    }
+
+
+    /* =====================================
+       حفظ تعديلات الأصناف والأسعار
+    ====================================== */
+
+
+    function savePrices() {
+
+
+      document
+        .querySelectorAll(
+          ".edit-item-row input"
+        )
+        .forEach(
+          input => {
+
+            input.classList.remove(
+              "input-error"
+            );
+
+          }
+        );
+
+
+      for (
+        let i = 0;
+        i < items.length;
+        i++
+      ) {
+
+
+        const nameInput =
+          document.getElementById(
+            edit-name-${i}
+          );
+
+
+        const unitsInput =
+          document.getElementById(
+            edit-units-${i}
+          );
+
+
+        const priceInput =
+          document.getElementById(
+            edit-price-${i}
+          );
+
+
+        const currentItemName =
+          items[i].name ||
+          الصنف رقم ${i + 1};
+
+
+        if (
+          !nameInput.value.trim()
+        ) {
+
+
+          nameInput.classList.add(
+            "input-error"
+          );
+
+
+          nameInput.focus();
+
+
+          alert(
+            "لا يمكن ترك حقل اسم الصنف فارغاً"
+          );
+
+
+          return;
+
+        }if (
+          !unitsInput.value.trim()
+        ) {
+
+
+          unitsInput.classList.add(
+            "input-error"
+          );
+
+
+          unitsInput.focus();
+
+
+          alert(
+            لا يمكن ترك حقل حبات/كرتون للصنف (${currentItemName}) فارغاً
+          );
+
+
+          return;
+
+        }
+
+
+        if (
+          !priceInput.value.trim()
+        ) {
+
+
+          priceInput.classList.add(
+            "input-error"
+          );
+
+
+          priceInput.focus();
+
+
+          alert(
+            لا يمكن ترك حقل سعر الكرتون للصنف (${currentItemName}) فارغاً
+          );
+
+
+          return;
+
+        }
+
+
+      }
+
+
+      items.forEach(
+        (item, i) => {
+
+
+          item.name =
+            document.getElementById(
+              edit-name-${i}
+            ).value.trim();
+
+
+          item.unitsPerBox =
+            Math.max(
+              1,
+              Number(
+                document.getElementById(
+                  edit-units-${i}
+                ).value
+              )
+            );
+
+
+          item.boxPrice =
+            Number(
+              document.getElementById(
+                edit-price-${i}
+              ).value
+            );
+
+
+        }
+      );
+
+
+      localStorage.setItem(
+        "icecream_app_items",
+        JSON.stringify(items)
+      );
+
+
+      closeEditModal();
+
+
+      renderMainList();
+
+
+    }
+
+
+    /* =====================================
+       حذف صنف
+    ====================================== */
+
+
+    function deleteItem(
+      index
+    ) {
+
+
+      if (
+        confirm(
+          هل أنت متأكد من حذف ${items[index].name}؟
+        )
+      ) {
+
+
+        items.splice(
+          index,
+          1
+        );
+
+
+        localStorage.setItem(
+          "icecream_app_items",
+          JSON.stringify(items)
+        );
+
+
+        openEditModal();
+
+
+        renderMainList();
+
+
+      }
+
+    }
+
+
+    /* =====================================
+       إغلاق نافذة التعديل
+    ====================================== */
+
+
+    function closeEditModal() {
+
+
+      document.getElementById(
+        "editModal"
+      ).style.display =
+        "none";
+
+
+    }
+
+
+    /* =====================================
+       فتح نافذة إضافة صنف
+    ====================================== */
+
+
+    function openAddModal() {
+
+
+      document.getElementById(
+        "addModal"
+      ).style.display =
+        "flex";
+
+
+    }
+
+
+    /* =====================================
+       إغلاق نافذة إضافة صنف
+    ====================================== */
+
+
+    function closeAddModal() {
+
+
+      document.getElementById(
+        "addModal"
+      ).style.display =
+        "none";
+
+
+    }
+
+
+    /* =====================================
+       حفظ صنف جديد
+    ====================================== */
+
+
+    function saveNewItem() {
+
+
+      const nameInput =
+        document.getElementById(
+          "newName"
+        );
+
+
+      const unitsInput =
+        document.getElementById(
+          "newUnitsPerBox"
+        );
+
+
+      const priceInput =
+        document.getElementById(
+          "newBoxPrice"
+        );
+
+
+      const name =
+        nameInput.value.trim();
+
+
+      const units =
+        unitsInput.value.trim();
+
+
+      const price =
+        priceInput.value.trim();
+
+
+      if (!name) {
+
+
+        alert(
+          "لا يمكن ترك حقل اسم الصنف فارغاً"
+        );
+
+
+        nameInput.focus();
+
+
+        return;
+
+      }
+
+
+      if (!units) {
+
+
+        alert(
+          "لا يمكن ترك حقل سعة الكرتون فارغاً"
+        );
+
+
+        unitsInput.focus();
+
+
+        return;
+
+      }
+
+
+      if (!price) {
+
+
+        alert(
+          "لا يمكن ترك حقل سعر الكرتون فارغاً"
+        );
+
+
+        priceInput.focus();
+
+
+        return;
+
+      }
+
+
+      items.push({
+
+        id:
+          Date.now(),
+
+        name:
+          name,
+
+        unitsPerBox:
+          Math.max(
+            1,
+            Number(units)
+          ),
+
+        boxPrice:
+          Number(price),
+
+        image:
+          selectedImageData || "",
+
+        boxQty:
+          "",
+
+        pieceQty:
+          ""
+
+      });
+      localStorage.setItem(
+        "icecream_app_items",
+        JSON.stringify(items)
+      );
+
+
+      renderMainList();
+
+
+      closeAddModal();
+
+
+      nameInput.value =
+        "";
+
+      unitsInput.value =
+        "";
+
+      priceInput.value =
+        "";
+
+
+      document.getElementById(
+        "newImage"
+      ).value =
+        "";
+
+
+      document.getElementById(
+        "imagePreview"
+      ).style.display =
+        "none";
+
+
+      document.getElementById(
+        "imagePreview"
+      ).src =
+        "";
+
+
+      selectedImageData =
+        "";
+
+
+    }
+
+
+    /* =====================================
+       إغلاق النوافذ عند الضغط خارجها
+    ====================================== */
+
+
+    document
+      .getElementById(
+        "editModal"
+      )
+      .addEventListener(
+        "click",
+        function(e) {
+
+          if (
+            e.target ===
+            this
+          ) {
+
+            closeEditModal();
+
+          }
+
+        }
+      );
+
+
+    document
+      .getElementById(
+        "addModal"
+      )
+      .addEventListener(
+        "click",
+        function(e) {
+
+          if (
+            e.target ===
+            this
+          ) {
+
+            closeAddModal();
+
+          }
+
+        }
+      );
+
+
+    /* =====================================
+       بدء التطبيق
+    ====================================== */
+
+
+    renderMainList();
+
+
+  </script>
+
+
+</body>
+
+</html>
