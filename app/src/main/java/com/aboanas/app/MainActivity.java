@@ -1,23 +1,18 @@
 package com.aboanas.app;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.webkit.ValueCallback;
+import android.webkit.JsPromptResult;
+import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private WebView myWebView;
-    private ValueCallback<Uri[]> uploadMessage;
-    private final static int FILECHOOSER_RESULTCODE = 1;
+    private WebView mywebview;
 
     @SuppressLint("SetJavaScriptEnabled")
     @Override
@@ -25,56 +20,48 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        myWebView = findViewById(R.id.webView);
+        mywebview = findViewById(R.id.webView);
 
-        WebSettings webSettings = myWebView.getSettings();
+        WebSettings webSettings = mywebview.getSettings();
+        // تفعيل الجافاسكربت
         webSettings.setJavaScriptEnabled(true);
+        // تفعيل التخزين المحلي للأصناف والأسعار
         webSettings.setDomStorageEnabled(true);
+        webSettings.setDatabaseEnabled(true);
         webSettings.setAllowFileAccess(true);
         webSettings.setAllowContentAccess(true);
-        webSettings.setDatabaseEnabled(true);
 
-        myWebView.setWebViewClient(new WebViewClient());
+        // فتح الروابط داخل التطبيق
+        mywebview.setWebViewClient(new WebViewClient());
 
-        myWebView.setWebChromeClient(new WebChromeClient() {
+        // تفعيل مربعات الإدخال والتنبيهات (Prompt / Alert / Confirm)
+        mywebview.setWebChromeClient(new WebChromeClient() {
             @Override
-            public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, FileChooserParams fileChooserParams) {
-                if (uploadMessage != null) {
-                    uploadMessage.onReceiveValue(null);
-                    uploadMessage = null;
-                }
-                uploadMessage = filePathCallback;
+            public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
+                return super.onJsAlert(view, url, message, result);
+            }
 
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.addCategory(Intent.CATEGORY_OPENABLE);
-                intent.setType("image/*");
-                startActivityForResult(Intent.createChooser(intent, "اختر صورة المنتج"), FILECHOOSER_RESULTCODE);
-                return true;
+            @Override
+            public boolean onJsPrompt(WebView view, String url, String message, String defaultValue, JsPromptResult result) {
+                return super.onJsPrompt(view, url, message, defaultValue, result);
+            }
+
+            @Override
+            public boolean onJsConfirm(WebView view, String url, String message, JsResult result) {
+                return super.onJsConfirm(view, url, message, result);
             }
         });
 
-        myWebView.loadUrl("file:///android_asset/index.html");
-
-        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-                if (myWebView.canGoBack()) {
-                    myWebView.goBack();
-                } else {
-                    setEnabled(false);
-                    MainActivity.super.onBackPressed();
-                }
-            }
-        });
+        // تحميل ملف الواجهة
+        mywebview.loadUrl("file:///android_asset/index.html");
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == FILECHOOSER_RESULTCODE) {
-            if (uploadMessage == null) return;
-            uploadMessage.onReceiveValue(WebChromeClient.FileChooserParams.parseResult(resultCode, data));
-            uploadMessage = null;
+    public void onBackPressed() {
+        if (mywebview.canGoBack()) {
+            mywebview.goBack();
+        } else {
+            super.onBackPressed();
         }
     }
 }
