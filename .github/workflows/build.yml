@@ -30,3 +30,4 @@ jobs:
       with:
         name: AboAnas-App-Debug
         path: app/build/outputs/apk/debug/*.apk
+        
